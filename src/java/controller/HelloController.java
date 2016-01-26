@@ -5,6 +5,7 @@
  */
 package controller;
 
+import Model.HelloService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -35,7 +36,8 @@ public class HelloController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
            String name = request.getParameter("username");
-           String responseMsg = "Hello " + name + " Isn't Java great!";
+           HelloService helloSrv = new HelloService();
+           String responseMsg = helloSrv.sayHello(name);
            request.setAttribute("myMsg", responseMsg);
            
            RequestDispatcher view =
